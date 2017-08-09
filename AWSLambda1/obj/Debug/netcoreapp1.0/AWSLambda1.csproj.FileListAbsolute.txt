@@ -1,0 +1,7 @@
+C:\Personal Proj\AWSLambda1\AWSLambda1\bin\Debug\netcoreapp1.0\AWSLambda1.deps.json
+C:\Personal Proj\AWSLambda1\AWSLambda1\bin\Debug\netcoreapp1.0\AWSLambda1.dll
+C:\Personal Proj\AWSLambda1\AWSLambda1\bin\Debug\netcoreapp1.0\AWSLambda1.pdb
+C:\Personal Proj\AWSLambda1\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.AssemblyInfo.cs
+C:\Personal Proj\AWSLambda1\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.dll
+C:\Personal Proj\AWSLambda1\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.pdb
+C:\Personal Proj\AWSLambda1\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.csprojResolveAssemblyReference.cache
