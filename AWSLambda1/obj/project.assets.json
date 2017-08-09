@@ -32,77 +32,6 @@
           "lib/netstandard1.3/Amazon.Lambda.Serialization.Json.dll": {}
         }
       },
-      "CoreCompat.System.ComponentModel.Attributes/4.2.3-rg": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.Registry": "4.0.0",
-          "System.Collections.NonGeneric": "4.0.1",
-          "System.Collections.Specialized": "4.0.1",
-          "System.ComponentModel": "4.0.1",
-          "System.ComponentModel.Primitives": "4.1.0",
-          "System.ComponentModel.TypeConverter": "4.1.0",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Diagnostics.Tools": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Runtime.InteropServices": "4.1.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.3/CoreCompat.System.ComponentModel.Attributes.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/CoreCompat.System.ComponentModel.Attributes.dll": {}
-        }
-      },
-      "CoreCompat.System.ComponentModel.DataAnnotations/4.2.3-r7": {
-        "type": "package",
-        "dependencies": {
-          "CoreCompat.System.ComponentModel.Attributes": "4.2.3-rg",
-          "CoreCompat.System.ComponentModel.Design": "4.2.3-r3",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Resources.ResourceManager": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.5/CoreCompat.System.ComponentModel.DataAnnotations.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.5/CoreCompat.System.ComponentModel.DataAnnotations.dll": {}
-        }
-      },
-      "CoreCompat.System.ComponentModel.Design/4.2.3-r3": {
-        "type": "package",
-        "dependencies": {
-          "CoreCompat.System.ComponentModel.Attributes": "4.2.3-rf",
-          "System.Collections": "4.0.11",
-          "System.Collections.Specialized": "4.0.1",
-          "System.ComponentModel": "4.0.1",
-          "System.ComponentModel.Primitives": "4.1.0",
-          "System.ComponentModel.TypeConverter": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.5/CoreCompat.System.ComponentModel.Design.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.5/CoreCompat.System.ComponentModel.Design.dll": {}
-        }
-      },
-      "JetBrains.Annotations/10.2.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Runtime": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.0/JetBrains.Annotations.NetStandard.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/JetBrains.Annotations.NetStandard.dll": {}
-        }
-      },
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -399,7 +328,7 @@
           "System.Runtime.InteropServices": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/Microsoft.Win32.Registry.dll": {}
+          "ref/netstandard1.3/_._": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/Microsoft.Win32.Registry.dll": {
@@ -461,7 +390,7 @@
           "System.Xml.XDocument": "4.0.11"
         }
       },
-      "Newtonsoft.Json/9.0.2-beta1": {
+      "Newtonsoft.Json/9.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
@@ -478,7 +407,6 @@
           "System.Resources.ResourceManager": "4.0.1",
           "System.Runtime": "4.1.0",
           "System.Runtime.Extensions": "4.1.0",
-          "System.Runtime.Numerics": "4.0.1",
           "System.Runtime.Serialization.Primitives": "4.1.1",
           "System.Text.Encoding": "4.0.11",
           "System.Text.Encoding.Extensions": "4.0.11",
@@ -489,10 +417,10 @@
           "System.Xml.XDocument": "4.0.11"
         },
         "compile": {
-          "lib/netstandard1.1/Newtonsoft.Json.dll": {}
+          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.1/Newtonsoft.Json.dll": {}
+          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
       "RestSharp.NetCore/105.2.4-rc4-24214-01": {
@@ -713,21 +641,6 @@
             "assetType": "native",
             "rid": "ubuntu.16.10-x64"
           }
-        }
-      },
-      "Slight.Alexa.Core/1.0.10-beta": {
-        "type": "package",
-        "dependencies": {
-          "CoreCompat.System.ComponentModel.DataAnnotations": "4.2.3-r7",
-          "JetBrains.Annotations": "10.2.1",
-          "NETStandard.Library": "1.6.0",
-          "Newtonsoft.Json": "9.0.2-beta1"
-        },
-        "compile": {
-          "lib/netstandard1.6/Slight.Alexa.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Slight.Alexa.Core.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -2640,53 +2553,6 @@
         "lib/netstandard1.3/Amazon.Lambda.Serialization.Json.xml"
       ]
     },
-    "CoreCompat.System.ComponentModel.Attributes/4.2.3-rg": {
-      "sha512": "M6wlcIE3i30JhRZNF/tfE0mUShLhnc54bKrRLCGHU9Cs9XvZ09O+7dtBzDSj5f5Y8RgRF5vT9gxySTnT7pVAKg==",
-      "type": "package",
-      "path": "corecompat.system.componentmodel.attributes/4.2.3-rg",
-      "files": [
-        "corecompat.system.componentmodel.attributes.4.2.3-rg.nupkg.sha512",
-        "corecompat.system.componentmodel.attributes.nuspec",
-        "lib/netstandard1.3/CoreCompat.System.ComponentModel.Attributes.dll"
-      ]
-    },
-    "CoreCompat.System.ComponentModel.DataAnnotations/4.2.3-r7": {
-      "sha512": "k02b4WM6GWw78s04yuwDjrjeY3eutgwo0L7g+xq6F9j8flgJif14DDQkD/ijl5HDADa53UStmIrmjNvbwpLE5A==",
-      "type": "package",
-      "path": "corecompat.system.componentmodel.dataannotations/4.2.3-r7",
-      "files": [
-        "corecompat.system.componentmodel.dataannotations.4.2.3-r7.nupkg.sha512",
-        "corecompat.system.componentmodel.dataannotations.nuspec",
-        "lib/netstandard1.5/CoreCompat.System.ComponentModel.DataAnnotations.dll"
-      ]
-    },
-    "CoreCompat.System.ComponentModel.Design/4.2.3-r3": {
-      "sha512": "wjbA4GTTAB0cVbKaxRJSGPwdb8svbCLfTLsd1YR/NKWeuiuPPhfuLujW+RVCOWl7twIVyf35VTya63S6THEXbw==",
-      "type": "package",
-      "path": "corecompat.system.componentmodel.design/4.2.3-r3",
-      "files": [
-        "corecompat.system.componentmodel.design.4.2.3-r3.nupkg.sha512",
-        "corecompat.system.componentmodel.design.nuspec",
-        "lib/netstandard1.5/CoreCompat.System.ComponentModel.Design.dll"
-      ]
-    },
-    "JetBrains.Annotations/10.2.1": {
-      "sha512": "yTPQ3CsP2I/3vgAsXWby3Bf+dbzsQC5I8/aOsktLi/cSvr50tVTANcL5rTrEmIllbEhZbtZ0rxzxJ2RU8UkMRg==",
-      "type": "package",
-      "path": "jetbrains.annotations/10.2.1",
-      "files": [
-        "jetbrains.annotations.10.2.1.nupkg.sha512",
-        "jetbrains.annotations.nuspec",
-        "lib/net/JetBrains.Annotations.dll",
-        "lib/net/JetBrains.Annotations.xml",
-        "lib/netstandard1.0/JetBrains.Annotations.NetStandard.dll",
-        "lib/netstandard1.0/JetBrains.Annotations.NetStandard.xml",
-        "lib/portable-net4+sl4+wp7+netcore45/JetBrains.Annotations.PCL1.dll",
-        "lib/portable-net4+sl4+wp7+netcore45/JetBrains.Annotations.PCL1.xml",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/JetBrains.Annotations.PCL328.dll",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/JetBrains.Annotations.PCL328.xml"
-      ]
-    },
     "Libuv/1.9.1": {
       "sha512": "uqX2Frwf9PW8MaY7PRNY6HM5BpW1D8oj1EdqzrmbEFD5nH63Yat3aEjN/tws6Tw6Fk7LwmLBvtUh32tTeTaHiA==",
       "type": "package",
@@ -3054,11 +2920,13 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/9.0.2-beta1": {
-      "sha512": "bq5DjCtCJpy9R5rsEeQlKz8qGF1Bh3wGaJKMlRwmCoKZ8WUCIFtU3JlyMOdAkSn66KCehCCAxMZFOQD4nNnH/w==",
+    "Newtonsoft.Json/9.0.1": {
+      "sha512": "U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
       "type": "package",
-      "path": "newtonsoft.json/9.0.2-beta1",
+      "path": "newtonsoft.json/9.0.1",
       "files": [
+        "Newtonsoft.Json.9.0.1.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -3069,14 +2937,10 @@
         "lib/net45/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/netstandard1.1/Newtonsoft.Json.dll",
-        "lib/netstandard1.1/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.9.0.2-beta1.nupkg.sha512",
-        "newtonsoft.json.nuspec",
         "tools/install.ps1"
       ]
     },
@@ -3304,16 +3168,6 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
-      ]
-    },
-    "Slight.Alexa.Core/1.0.10-beta": {
-      "sha512": "YMn2AHzmv1WWbJd/YAyWPdNJX6z/XuszPcbm8G6Z++pmjtm2YtadnUKKJiYT2+XSYNqS9at12jkf78HHrFrw0Q==",
-      "type": "package",
-      "path": "slight.alexa.core/1.0.10-beta",
-      "files": [
-        "lib/netstandard1.6/Slight.Alexa.Core.dll",
-        "slight.alexa.core.1.0.10-beta.nupkg.sha512",
-        "slight.alexa.core.nuspec"
       ]
     },
     "System.AppContext/4.1.0": {
@@ -7895,7 +7749,6 @@
       "Amazon.Lambda.Serialization.Json >= 1.1.0",
       "Microsoft.NETCore.App >= 1.0.5",
       "RestSharp.NetCore >= 105.2.4-rc4-24214-01",
-      "Slight.Alexa.Core >= 1.0.10-beta",
       "System.Net.Http >= 4.3.2",
       "System.Runtime.Serialization.Xml >= 4.3.0"
     ]
@@ -7906,10 +7759,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gtt0910\\Source\\Repos\\aAlexaSkill\\AWSLambda1\\AWSLambda1.csproj",
+      "projectUniqueName": "C:\\Personal Proj\\aAlexaSkill\\AWSLambda1\\AWSLambda1.csproj",
       "projectName": "AWSLambda1",
-      "projectPath": "C:\\Users\\gtt0910\\Source\\Repos\\aAlexaSkill\\AWSLambda1\\AWSLambda1.csproj",
-      "outputPath": "C:\\Users\\gtt0910\\Source\\Repos\\aAlexaSkill\\AWSLambda1\\obj\\",
+      "projectPath": "C:\\Personal Proj\\aAlexaSkill\\AWSLambda1\\AWSLambda1.csproj",
+      "outputPath": "C:\\Personal Proj\\aAlexaSkill\\AWSLambda1\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.0"
@@ -7926,10 +7779,6 @@
           "Amazon.Lambda.Core": {
             "target": "Package",
             "version": "1.0.0"
-          },
-          "Slight.Alexa.Core": {
-            "target": "Package",
-            "version": "1.0.10-beta"
           },
           "RestSharp.NetCore": {
             "target": "Package",

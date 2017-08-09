@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Slight.Alexa.Framework.Models.Requests;
-using Slight.Alexa.Framework.Models.Responses;
-
 using Amazon.Lambda.Core;
+using AWSLambda1.Models.Requests;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using RestSharp;
-using Slight.Alexa.Framework.Models.Requests.RequestTypes;
+using AWSLambda1.Models.Requests.RequestTypes;
+using AWSLambda1.Models.Responses;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
@@ -35,7 +34,7 @@ namespace AWSLambda1
         }
 
         [JsonProperty("version")]
-        public string Version { get; set; }
+        public string Version { get; set; } = "1.0";
 
         [JsonProperty("context")]
         public Context context { get; set; }
@@ -293,9 +292,13 @@ namespace AWSLambda1
         {
             SkillResponse skillResponse = new SkillResponse();
 
-            var speech = "You can say, 'Whats my bill' or 'Pay my bill' or 'Talk to the Product owner'";
+            var speech = "<speak>You can say, <prosody rate=\"slow\">'Whats my bill' or 'Pay my bill' or 'Talk to the Product owner'</prosody><speak>";
 
-            PlainTextOutputSpeech innerResponse = new PlainTextOutputSpeech { Text = speech };
+            SsmlOutputSpeech innerResponse = new SsmlOutputSpeech()
+            {
+                Ssml = speech
+            };
+
             Response innerResponseresponse = new Response
             {
                 OutputSpeech = innerResponse
