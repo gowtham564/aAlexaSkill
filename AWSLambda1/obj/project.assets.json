@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
       "Amazon.Lambda.Core/1.0.0": {
@@ -7758,15 +7758,28 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Personal Proj\\aAlexaSkill\\AWSLambda1\\AWSLambda1.csproj",
       "projectName": "AWSLambda1",
       "projectPath": "C:\\Personal Proj\\aAlexaSkill\\AWSLambda1\\AWSLambda1.csproj",
+      "packagesPath": "C:\\Users\\gtt0910\\.nuget\\packages\\",
       "outputPath": "C:\\Personal Proj\\aAlexaSkill\\AWSLambda1\\obj\\",
       "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\gtt0910\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp1.0"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://H1818/nuget": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "netcoreapp1.0": {
           "projectReferences": {}
@@ -7804,5 +7817,17 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "RestSharp.NetCore 105.2.4-rc4-24214-01 depends on System.Runtime.Serialization.Formatters (>= 4.0.0-rc4-24217-03) but System.Runtime.Serialization.Formatters 4.0.0-rc4-24217-03 was not found. An approximate best match of System.Runtime.Serialization.Formatters 4.3.0-preview1-24530-04 was resolved.",
+      "libraryId": "System.Runtime.Serialization.Formatters",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v1.0"
+      ]
+    }
+  ]
 }

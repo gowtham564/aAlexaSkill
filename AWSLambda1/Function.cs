@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 using Amazon.Lambda.Core;
 using AWSLambda1.Models.Requests;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
-using RestSharp;
 using AWSLambda1.Models.Requests.RequestTypes;
 using AWSLambda1.Models.Responses;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
@@ -212,14 +215,14 @@ namespace AWSLambda1
         public SkillResponse FunctionHandler(SkillRequest input, ILambdaContext context)
         {
             SkillResponse response = null;
-
+            
             switch (input.Request.Type)
             {
                 case "LaunchRequest":
                     response = LaunchRequestHandler(input.Request);
                     break;
                 case "IntentRequest":
-                    response = IntentRequestHandler(input.Request);
+                    response = IntentRequestHandler(input.Request, input.Session.User.AccessToken);
                     break;
                 case "SessionEndedRequest":
                     response = SessionEndedRequestHandler(input.Request);
@@ -253,7 +256,7 @@ namespace AWSLambda1
 
         #region IntentRequestHandler
 
-        private SkillResponse IntentRequestHandler(RequestBundle request)
+        private SkillResponse IntentRequestHandler(RequestBundle request, string accessToken)
         {
             SkillResponse response = null;
 
@@ -262,8 +265,11 @@ namespace AWSLambda1
                 case "HelloIntent":
                     response = HelloIntentHandler(request);
                     break;
+                case "TalkToProductOwner":
+                    response = HelloIntentHandler(request);
+                    break;
                 case "GetCurrentBill":
-                    response = GetCurrentBillHandler(request);
+                    response = GetCurrentBillHandler(request, accessToken);
                     break;
 
                 case "AMAZON.CancelIntent":
@@ -281,18 +287,11 @@ namespace AWSLambda1
             return response;
         }
 
-        private SkillResponse GetCurrentBillHandler(RequestBundle request)
-        {
-            SkillResponse response = new SkillResponse();
-
-            return response;
-        }
-
         private SkillResponse HelpIntent(RequestBundle request)
         {
             SkillResponse skillResponse = new SkillResponse();
 
-            var speech = "<speak>You can say, <prosody rate=\"slow\">'Whats my bill' or 'Pay my bill' or 'Talk to the Product owner'</prosody><speak>";
+            var speech = "<speak>You can say, <prosody rate=\"slow\">'Whats my bill' or 'Pay my bill' or 'Talk to the Product owner'</prosody></speak>";
 
             SsmlOutputSpeech innerResponse = new SsmlOutputSpeech()
             {
@@ -310,17 +309,41 @@ namespace AWSLambda1
 
         private SkillResponse StopIntentHandler(RequestBundle request)
         {
-            throw new NotImplementedException();
+            SkillResponse skillResponse = new SkillResponse();
+
+            var speech = "Thank You for visiting Avista Skill. Come back soon. Bye now";
+
+
+            PlainTextOutputSpeech innerResponse = new PlainTextOutputSpeech { Text = speech };
+            Response innerResponseresponse = new Response
+            {
+                OutputSpeech = innerResponse,
+                ShouldEndSession = true
+            };
+            skillResponse.Response = innerResponseresponse;
+
+            return skillResponse;
         }
 
         private SkillResponse CancelOrStopIntentHandler(RequestBundle request)
         {
-            throw new NotImplementedException();
+            SkillResponse skillResponse = new SkillResponse();
+
+            var speech = "Operation Cancelled. You can say Help or continue to issue commands to Road Star.";
+
+
+            PlainTextOutputSpeech innerResponse = new PlainTextOutputSpeech { Text = speech };
+            Response innerResponseresponse = new Response
+            {
+                OutputSpeech = innerResponse
+            };
+            skillResponse.Response = innerResponseresponse;
+
+            return skillResponse;
         }
 
         private SkillResponse HelloIntentHandler(RequestBundle request)
         {
-
             SkillResponse skillResponse = new SkillResponse();
 
             var speech = "Hi and Welcome to Avista Voice App. Please issue your voice commands or say Help to get a list.";
@@ -335,28 +358,96 @@ namespace AWSLambda1
             return skillResponse;
         }
 
+        private SkillResponse TalkToProductOwnerHandler(RequestBundle request)
+        {
+            SkillResponse skillResponse = new SkillResponse();
+
+            var speech = "If you need any new features for this skill, you got the right person. Too bad Amy is in a meeting right now. Bye Now.";
+
+            PlainTextOutputSpeech innerResponse = new PlainTextOutputSpeech { Text = speech };
+            Response innerResponseresponse = new Response
+            {
+                OutputSpeech = innerResponse,
+                ShouldEndSession = true
+            };
+            skillResponse.Response = innerResponseresponse;
+
+            return skillResponse;
+        }
+
+        public SkillResponse GetCurrentBillHandler(RequestBundle request, string accessToken)
+        {
+            SkillResponse response = new SkillResponse();
+            string pathSeg = "http://gatewayapimock20170817012815.azurewebsites.net/api/BillingDetails/3";
+            //string strJsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var restRequest = new RestRequest( Method.GET);
+
+            var restResponse = CallService(pathSeg, restRequest, null, true); var speech = "Hi and Welcome to Avista Voice App. Please issue your voice commands or say Help to get a list.";
+
+            if (restResponse.StatusCode != HttpStatusCode.OK)
+            {
+                PlainTextOutputSpeech innerResponse = new PlainTextOutputSpeech {Text = $"Sorry, something went wrong {restResponse.StatusCode}"};
+                Response innerResponseresponse = new Response
+                {
+                    OutputSpeech = innerResponse
+                };
+                response.Response = innerResponseresponse;
+            }
+            else
+            {
+                var response1 = JObject.Parse(restResponse.Content).ToObject<GetAccountDetailsResponse>();
+
+                PlainTextOutputSpeech innerResponse = new PlainTextOutputSpeech
+                {
+                    Text = $" Hi {response1.Name}, you account balance is {response1.CurrentBalance}. Access Token is {accessToken}"
+                };
+                Response innerResponseresponse = new Response
+                {
+                    OutputSpeech = innerResponse
+                };
+                response.Response = innerResponseresponse;
+            }
+            return response;
+        }
         #endregion
 
-        private IRestResponse CallService(string url, IRestRequest request, string jsonContent, bool addParameter)
+        private RestResponse CallService(string url, RestRequest request, string jsonContent, bool addParameter)
         {
-            IRestResponse restResponse;
+            RestResponse restResponse = new RestResponse();
+            request.Credentials = CredentialCache.DefaultCredentials; 
 
             if (addParameter)
             {
                 request.AddParameter("application/json", jsonContent, ParameterType.RequestBody);
             }
+            var handler = new HttpClientHandler { UseDefaultCredentials = true };
 
-            try
+            var client = new RestClient(url);
+            
+            Task.Run(async () =>
             {
-                var client = new RestClient(url);
-                
-                restResponse = client.Execute(request);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                restResponse = await GetResponseContentAsync(client, request) as RestResponse;
+            }).Wait();
             return restResponse;
+        }
+        public static Task<IRestResponse> GetResponseContentAsync(RestClient theClient, RestRequest theRequest)
+        {
+            var tcs = new TaskCompletionSource<IRestResponse>();
+            theClient.ExecuteAsync(theRequest, response => {
+                tcs.SetResult(response);
+            });
+            return tcs.Task;
+        }
+
+        private string AddSSML(string text)
+        {
+
+            string _text = string.Empty;
+
+            _text = "<speak>" + text + "</speak>";
+
+            return _text;
+
         }
     }
 }

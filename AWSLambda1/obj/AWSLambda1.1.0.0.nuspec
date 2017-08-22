@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>AWSLambda1</id>
+    <version>1.0.0</version>
+    <authors>AWSLambda1</authors>
+    <owners>AWSLambda1</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp1.0">
+        <dependency id="Amazon.Lambda.Core" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.NETCore.App" version="1.0.5" exclude="Build,Analyzers" />
+        <dependency id="Amazon.Lambda.Serialization.Json" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.Serialization.Xml" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Personal Proj\aAlexaSkill\AWSLambda1\bin\Release\netcoreapp1.0\AWSLambda1.dll" target="lib\netcoreapp1.0\AWSLambda1.dll" />
+  </files>
+</package>
