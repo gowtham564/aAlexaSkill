@@ -20,3 +20,10 @@ C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.cspro
 C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.AssemblyInfo.cs
 C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.dll
 C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.pdb
+C:\git\aAlexaSkill\AWSLambda1\bin\Debug\netcoreapp1.0\AWSLambda1.deps.json
+C:\git\aAlexaSkill\AWSLambda1\bin\Debug\netcoreapp1.0\AWSLambda1.dll
+C:\git\aAlexaSkill\AWSLambda1\bin\Debug\netcoreapp1.0\AWSLambda1.pdb
+C:\git\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.csproj.CoreCompileInputs.cache
+C:\git\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.AssemblyInfo.cs
+C:\git\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.dll
+C:\git\aAlexaSkill\AWSLambda1\obj\Debug\netcoreapp1.0\AWSLambda1.pdb

@@ -12,3 +12,11 @@ C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.dll
 C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.pdb
 C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.csprojResolveAssemblyReference.cache
 C:\Personal Proj\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.csproj.CoreCompileInputs.cache
+C:\git\aAlexaSkill\AWSLambda1\bin\Release\netcoreapp1.0\AWSLambda1.deps.json
+C:\git\aAlexaSkill\AWSLambda1\bin\Release\netcoreapp1.0\AWSLambda1.dll
+C:\git\aAlexaSkill\AWSLambda1\bin\Release\netcoreapp1.0\AWSLambda1.pdb
+C:\git\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.csprojResolveAssemblyReference.cache
+C:\git\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.csproj.CoreCompileInputs.cache
+C:\git\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.AssemblyInfo.cs
+C:\git\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.dll
+C:\git\aAlexaSkill\AWSLambda1\obj\Release\netcoreapp1.0\AWSLambda1.pdb

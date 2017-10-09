@@ -15,6 +15,6 @@
     "function-timeout"     : 30,
     "function-handler"     : "AWSLambda1::AWSLambda1.Function::FunctionHandler",
     "function-name"        : "AWSLambda1Endpoint",
-    "function-role"        : "arn:aws:iam::818775727969:role/lambda_exec_AWSLambdaEndpoint",
+    "function-role"        : "arn:aws:iam::818775727969:role/lambda_exec_AWSLambdaEndpoint-0",
     "environment-variables" : ""
 }

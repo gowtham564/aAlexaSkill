@@ -13,3 +13,18 @@ C:\Personal Proj\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.
 C:\Personal Proj\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.AssemblyInfo.cs
 C:\Personal Proj\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.dll
 C:\Personal Proj\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.pdb
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\AWSLambda1.Test.deps.json
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\AWSLambda1.Test.runtimeconfig.json
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\AWSLambda1.Test.runtimeconfig.dev.json
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\AWSLambda1.Test.dll
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\AWSLambda1.Test.pdb
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\AWSLambda1.dll
+C:\git\aAlexaSkill\AWSLambda1.Test\bin\Debug\netcoreapp1.1\AWSLambda1.pdb
+C:\git\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.csprojResolveAssemblyReference.cache
+C:\git\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.csproj.CoreCompileInputs.cache
+C:\git\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.AssemblyInfo.cs
+C:\git\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.dll
+C:\git\aAlexaSkill\AWSLambda1.Test\obj\Debug\netcoreapp1.1\AWSLambda1.Test.pdb
