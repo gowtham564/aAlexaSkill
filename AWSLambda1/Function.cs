@@ -225,23 +225,23 @@ namespace AWSLambda1
                     response = IntentRequestHandler(input);
                     break;
                 case "SessionEndedRequest":
-                    response = SessionEndedRequestHandler(input.Request);
+                    response = SessionEndedRequestHandler(input);
                     break;
             }
 
             return response;
         }
 
-        private SkillResponse SessionEndedRequestHandler(object request)
+        private SkillResponse SessionEndedRequestHandler(SkillRequest skillRequest)
         {
-            throw new NotImplementedException();
+            return CancelOrStopIntentHandler(skillRequest);
         }
 
         private SkillResponse LaunchRequestHandler(RequestBundle request)
         {
             SkillResponse skillResponse = new SkillResponse();
 
-            var speech = "Hi and Welcome to Avista Voice App. Please issue your voice commands or say Help to get a list.";
+            var speech = "Hello Mark, Welcome to Avista, To hear about things you can do with the Avista Skill, ask me a question or say Help at any time.";
 
             PlainTextOutputSpeech innerResponse = new PlainTextOutputSpeech {Text = speech};
             Response innerResponseresponse = new Response
@@ -256,35 +256,43 @@ namespace AWSLambda1
 
         #region IntentRequestHandler
 
-        private SkillResponse IntentRequestHandler(SkillRequest skiillRequest)
+        private SkillResponse IntentRequestHandler(SkillRequest skillRequest)
         {
             SkillResponse response = null;
 
-            switch (skiillRequest.Request.Intent.Name)
+            switch (skillRequest.Request.Intent.Name)
             {
                 case "HelloIntent":
-                    response = HelloIntentHandler(skiillRequest);
+                    response = HelloIntentHandler(skillRequest);
+                    break;
+                case "HighBill":
+                    response = HighBillHandler(skillRequest);
                     break;
                 case "TalkToProductOwner":
-                    response = TalkToProductOwnerHandler(skiillRequest);
+                    response = TalkToProductOwnerHandler(skillRequest);
                     break;
                 case "GetCurrentBill":
-                    response = GetCurrentBillHandler(skiillRequest, null);
+                    response = GetCurrentBillHandler(skillRequest, null);
+                    break;
+                case "MakePayment":
+                    response = PayMyBillHandler(skillRequest);
                     break;
 
                 case "AMAZON.CancelIntent":
-                    response = CancelOrStopIntentHandler(skiillRequest);
+                    response = CancelOrStopIntentHandler(skillRequest);
                     break;
                 case "AMAZON.NoIntent":
+                    response = NoIntentHandler(skillRequest);
+                    break;
                 case "AMAZON.StopIntent":
-                    response = StopIntentHandler(skiillRequest);
+                    response = StopIntentHandler(skillRequest);
                     break;
                 case "AMAZON.YesIntent":
-                    response = YesIntentHandler(skiillRequest);
+                    response = YesIntentHandler(skillRequest);
                     break;
                 case "AMAZON.HelpIntent":
                 case "HelpIntent":
-                    response = HelpIntent(skiillRequest);
+                    response = HelpIntent(skillRequest);
                     break;
             }
 
@@ -294,6 +302,20 @@ namespace AWSLambda1
         private SkillResponse NoIntentHandler(SkillRequest request)
         {
             return this.StopIntentHandler(request);
+        }
+        private SkillResponse HighBillHandler(SkillRequest request)
+        {
+            SkillResponse skillResponse = new SkillResponse();
+            SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
+            {
+                Ssml = "<speak>Your bill for the month of [February] is $173.45. Compared to January, this is $34.67 more due to the following reasons: Your average daily use per day increased. The weather was colder, likely causing your bill to increase between XX and XX. The temperature in Spokane, WA has been on average 14 degrees cooler compared to last month. Your bill cycle was three days longer this month than last month.</speak>"
+            };
+            Response response = new Response()
+            {
+                OutputSpeech = (IOutputSpeech)ssmlOutputSpeech
+            };
+            skillResponse.Response = response;
+            return skillResponse;
         }
 
         private SkillResponse YesIntentHandler(SkillRequest request)
@@ -308,10 +330,9 @@ namespace AWSLambda1
         private SkillResponse PayMyBillHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
-            string str1 = "<speak>Your payment of 12 dollars with VISA ending  <say-as interpret-as=\"digits\">4332</say-as> is scheduled for September 19th. Please say yes to confirm.</speak>";
             SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
             {
-                Ssml = str1
+                Ssml = "<speak>A payment of 125 dollars using VISA ending <say-as interpret-as=\"digits\">4332</say-as> is ready to be made today. Please say Yes to confirm this payment, or no to cancel.  </speak>"
             };
             Response response = new Response()
             {
@@ -329,10 +350,9 @@ namespace AWSLambda1
         private SkillResponse ConfirmedPaymentHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
-            string str1 = "Payment scheduled successfully. Would you like to hear about latest Avista products?";
-            PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
+            SsmlOutputSpeech textOutputSpeech = new SsmlOutputSpeech()
             {
-                Text = str1
+                Ssml = "<speak>A payment of 125 dollars using VISA ending <say-as interpret-as=\"digits\">4332</say-as> on Thursday October 19th has been completed successfully.  </speak>"
             };
             Response response = new Response()
             {
@@ -350,10 +370,9 @@ namespace AWSLambda1
         private SkillResponse HelpIntent(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
-            string str = "<speak>You can say, <prosody rate=\"slow\">'Whats my bill' or 'Pay my bill' or 'Talk to the Product owner'</prosody></speak>";
             SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
             {
-                Ssml = str
+                Ssml = "<speak>You can say, <prosody rate=\"slow\">'Whats my bill' or 'Pay my bill' or 'Talk to the Product owner'</prosody></speak>"
             };
             Response response = new Response()
             {
@@ -366,10 +385,9 @@ namespace AWSLambda1
         private SkillResponse StopIntentHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
-            string str = "Thank You for using Avista Skill. Come back soon. Bye now";
             PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
             {
-                Text = str
+                Text = "Thank You for using Avista Skill. Come back soon. Bye now"
             };
             Response response = new Response()
             {
@@ -383,10 +401,9 @@ namespace AWSLambda1
         private SkillResponse CancelOrStopIntentHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
-            string str = "Operation Cancelled..";
             PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
             {
-                Text = str
+                Text = "Operation Cancelled.."
             };
             Response response = new Response()
             {
@@ -400,11 +417,9 @@ namespace AWSLambda1
         {
             SkillResponse skillResponse = new SkillResponse();
 
-            var speech = "Hi and Welcome to Avista Voice App. Please issue your voice commands or say Help to get a list.";
-
             PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
             {
-                Text = speech
+                Text = "Hi and Welcome to Avista Voice App. Please issue your voice commands or say Help to get a list."
             };
             Response response = new Response()
             {
@@ -418,10 +433,9 @@ namespace AWSLambda1
         public SkillResponse TalkToProductOwnerHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
-            string str = "If you need any new features for this skill, you got the right person. Too bad Amy is in a conference in Vegas. Bye Now.";
             PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
             {
-                Text = str
+                Text = "If you need any new features for this skill, you got the right person.Too bad Amy is in a conference in Vegas.Bye Now."
             };
             Response response = new Response()
             {
@@ -436,39 +450,23 @@ namespace AWSLambda1
         public SkillResponse GetCurrentBillHandler(SkillRequest request, string accessToken)
         {
             SkillResponse skillResponse1 = new SkillResponse();
-            RestResponse restResponse = this.CallService("http://gatewayapimock20170817012815.azurewebsites.net/api/BillingDetails/3", new RestRequest(Method.GET), (string)null, true);
-            if (restResponse.StatusCode != HttpStatusCode.OK)
+            //RestResponse restResponse = this.CallService("http://gatewayapimock20170817012815.azurewebsites.net/api/BillingDetails/3", new RestRequest(Method.GET), (string)null, true);
+            //GetAccountDetailsResponse accountDetailsResponse = JObject.Parse(restResponse.Content).ToObject<GetAccountDetailsResponse>();
+            PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
             {
-                PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
-                {
-                    Text = string.Format("Sorry, something went wrong {0}", (object)restResponse.StatusCode)
-                };
-                Response response = new Response()
-                {
-                    OutputSpeech = (IOutputSpeech)textOutputSpeech,
-                    ShouldEndSession = true
-                };
-                skillResponse1.Response = response;
-            }
-            else
+                Text = string.Format(" Your account balance is 125 dollars. It is due on October 31st.. Would you like to pay your bill?")
+            };
+            Response response = new Response()
             {
-                GetAccountDetailsResponse accountDetailsResponse = JObject.Parse(restResponse.Content).ToObject<GetAccountDetailsResponse>();
-                PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
-                {
-                    Text = string.Format(" Hi {0}, your account balance is {1} dollars and payment is due on Dec 28th. Would you like to pay?", (object)accountDetailsResponse.Name, (object)accountDetailsResponse.CurrentBalance, (object)accountDetailsResponse.AccountId)
-                };
-                Response response = new Response()
-                {
-                    OutputSpeech = (IOutputSpeech)textOutputSpeech
-                };
-                skillResponse1.Response = response;
-                SkillResponse skillResponse2 = skillResponse1;
-                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                string index = "intentSequence";
-                string str = nameof(GetCurrentBillHandler);
-                dictionary[index] = (object)str;
-                skillResponse2.SessionAttributes = dictionary;
-            }
+                OutputSpeech = (IOutputSpeech)textOutputSpeech
+            };
+            skillResponse1.Response = response;
+            SkillResponse skillResponse2 = skillResponse1;
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            string index = "intentSequence";
+            string str = nameof(GetCurrentBillHandler);
+            dictionary[index] = (object)str;
+            skillResponse2.SessionAttributes = dictionary;
             return skillResponse1;
         }
         #endregion
