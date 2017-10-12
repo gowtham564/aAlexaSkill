@@ -277,7 +277,9 @@ namespace AWSLambda1
                 case "MakePayment":
                     response = PayMyBillHandler(skillRequest);
                     break;
-
+                case "WinAnEcho":
+                    response = WinAnEchoHandler(skillRequest);
+                    break;
                 case "AMAZON.CancelIntent":
                     response = CancelOrStopIntentHandler(skillRequest);
                     break;
@@ -301,20 +303,78 @@ namespace AWSLambda1
 
         private SkillResponse NoIntentHandler(SkillRequest request)
         {
-            return this.StopIntentHandler(request);
+            if (request.Session.Attributes["intentSequence"].ToString() == "ConfirmedPaymentHandler")
+                return this.SaveEnergyHandler(request);
+            else
+            {
+                SkillResponse skillResponse = new SkillResponse();
+
+                SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
+                {
+                    Ssml = ""
+                };
+                Response response = new Response()
+                {
+                    OutputSpeech = (IOutputSpeech)ssmlOutputSpeech
+                };
+                skillResponse.Response = response;
+                return skillResponse;
+            }
         }
-        private SkillResponse HighBillHandler(SkillRequest request)
+
+        private SkillResponse SaveEnergyHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
             SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
             {
-                Ssml = "<speak>Your bill for the month of [February] is $173.45. Compared to January, this is $34.67 more due to the following reasons: Your average daily use per day increased. The weather was colder, likely causing your bill to increase between XX and XX. The temperature in Spokane, WA has been on average 14 degrees cooler compared to last month. Your bill cycle was three days longer this month than last month.</speak>"
+                Ssml = "<speak>Would you like to hear how to save energy?</speak>"
             };
             Response response = new Response()
             {
                 OutputSpeech = (IOutputSpeech)ssmlOutputSpeech
             };
             skillResponse.Response = response;
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            string index = "intentSequence";
+            string str2 = nameof(SaveEnergyHandler);
+            dictionary[index] = (object)str2;
+            skillResponse.SessionAttributes = dictionary;
+            return skillResponse;
+        }
+        private SkillResponse WinAnEchoHandler(SkillRequest request)
+        {
+            SkillResponse skillResponse = new SkillResponse();
+            SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
+            {
+                Ssml = "<speak>Okay, let’s make this easy. Raise your hand if you know who created me?</speak>"
+            };
+            Response response = new Response()
+            {
+                ShouldEndSession = true,
+                OutputSpeech = (IOutputSpeech)ssmlOutputSpeech
+            };
+            skillResponse.Response = response;
+           
+            return skillResponse;
+        }   
+
+        private SkillResponse HighBillHandler(SkillRequest request)
+        {
+            SkillResponse skillResponse = new SkillResponse();
+            SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
+            {
+                Ssml = "<speak>Your bill for the month of January is 173 dollars and 45 cents. Compared to January of last year, this is 34 dollars 67 cents more due to the following reasons: 1.	The average temperature in Spokane, WA was 14 degrees cooler compared to last year. This caused your average daily use to increase, resulting in a monthly increase between 22 dollars and 28 dollars. Would you like to hear more?</speak>"
+            };
+            Response response = new Response()
+            {
+                OutputSpeech = (IOutputSpeech)ssmlOutputSpeech
+            };
+            skillResponse.Response = response;
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            string index = "intentSequence";
+            string str2 = nameof(HighBillHandler);
+            dictionary[index] = (object)str2;
+            skillResponse.SessionAttributes = dictionary;
             return skillResponse;
         }
 
@@ -325,14 +385,37 @@ namespace AWSLambda1
                 return this.PayMyBillHandler(request);
             if (request.Session.Attributes["intentSequence"].ToString() == "PayMyBillHandler")
                 return this.ConfirmedPaymentHandler(request);
+            if (request.Session.Attributes["intentSequence"].ToString() == "HighBillHandler")
+                return this.HighBillMoreHandler(request);
+            if (request.Session.Attributes["intentSequence"].ToString() == "SaveEnergyHandler")
+                return this.ContestHandler(request);
             return (SkillResponse)null;
+        }
+        private SkillResponse HighBillMoreHandler(SkillRequest request)
+        {
+            SkillResponse skillResponse = new SkillResponse();
+            SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
+            {
+                Ssml = "<speak>Your bill cycle was four days longer this month than last year at this time, resulting in an overall increase between 4 dollars and 7 dollars. Would you like to hear some tips on how to save energy?</speak>"
+            };
+            Response response = new Response()
+            {
+                OutputSpeech = (IOutputSpeech)ssmlOutputSpeech
+            };
+            skillResponse.Response = response;
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            string index = "intentSequence";
+            string str2 = nameof(HighBillMoreHandler);
+            dictionary[index] = (object)str2;
+            skillResponse.SessionAttributes = dictionary;
+            return skillResponse;
         }
         private SkillResponse PayMyBillHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
             SsmlOutputSpeech ssmlOutputSpeech = new SsmlOutputSpeech()
             {
-                Ssml = "<speak>A payment of 125 dollars using VISA ending <say-as interpret-as=\"digits\">4332</say-as> is ready to be made today. Please say Yes to confirm this payment, or no to cancel.  </speak>"
+                Ssml = "<speak>A payment of 173 dollars and 45 cents using VISA ending <say-as interpret-as=\"digits\">4332</say-as> is ready to be made today. Please say Yes to confirm this payment, or no to cancel.  </speak>"
             };
             Response response = new Response()
             {
@@ -347,12 +430,32 @@ namespace AWSLambda1
             return skillResponse;
         }
 
+        private SkillResponse ContestHandler(SkillRequest request)
+        {
+            SkillResponse skillResponse = new SkillResponse();
+            SsmlOutputSpeech textOutputSpeech = new SsmlOutputSpeech()
+            {
+                Ssml = "<speak>Would you like to hear about Energy Saving Tips, Rebate Options, or have a chance to win an Echo Dot?</speak>"
+            };
+            Response response = new Response()
+            {
+                OutputSpeech = (IOutputSpeech)textOutputSpeech
+            };
+            skillResponse.Response = response;
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            string index = "intentSequence";
+            string str2 = nameof(ContestHandler);
+            dictionary[index] = (object)str2;
+            skillResponse.SessionAttributes = dictionary;
+            return skillResponse;
+        }
+
         private SkillResponse ConfirmedPaymentHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
             SsmlOutputSpeech textOutputSpeech = new SsmlOutputSpeech()
             {
-                Ssml = "<speak>A payment of 125 dollars using VISA ending <say-as interpret-as=\"digits\">4332</say-as> on Thursday October 19th has been completed successfully.  </speak>"
+                Ssml = "<speak>Your payment of 173 dollars and 45 cents using VISA ending <say-as interpret-as=\"digits\">4332</say-as> on February 11th has been completed successfully. Do you need the confirmation number ?</speak>"
             };
             Response response = new Response()
             {
@@ -385,13 +488,9 @@ namespace AWSLambda1
         private SkillResponse StopIntentHandler(SkillRequest request)
         {
             SkillResponse skillResponse = new SkillResponse();
-            PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
-            {
-                Text = "Thank You for using Avista Skill. Come back soon. Bye now"
-            };
+            
             Response response = new Response()
             {
-                OutputSpeech = (IOutputSpeech)textOutputSpeech,
                 ShouldEndSession = true
             };
             skillResponse.Response = response;
@@ -454,7 +553,7 @@ namespace AWSLambda1
             //GetAccountDetailsResponse accountDetailsResponse = JObject.Parse(restResponse.Content).ToObject<GetAccountDetailsResponse>();
             PlainTextOutputSpeech textOutputSpeech = new PlainTextOutputSpeech()
             {
-                Text = string.Format(" Your account balance is 125 dollars. It is due on October 31st.. Would you like to pay your bill?")
+                Text = string.Format(" Your account balance is 173 dollars and 45 cents. It is due on Feb 15th. Would you like to pay your bill?")
             };
             Response response = new Response()
             {

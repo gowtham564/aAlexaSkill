@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AWSLambda1"
   ],
+  "SelectedNode": "\\AWSLambda1\\Function.cs",
   "PreviewInSolutionExplorer": false
 }
